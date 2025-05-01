@@ -1,0 +1,6 @@
+user:
+  id: int
+  refresh: string
+  class: char
+  phone: long
+  is_auth: bool
