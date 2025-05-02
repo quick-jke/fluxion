@@ -3,4 +3,4 @@ user:
   refresh: string
   class: char
   phone: long
-  is_auth: bool
+  isAuth: bool
