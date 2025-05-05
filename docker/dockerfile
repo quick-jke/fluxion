@@ -11,17 +11,7 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ARG YAML_VERSION=0.8.0
-WORKDIR /tmp/yaml-cpp
-RUN git clone https://github.com/jbeder/yaml-cpp.git . && \
-    git checkout ${YAML_VERSION} && \
-    mkdir build && \
-    cd build && \
-    cmake .. -DYAML_CPP_BUILD_TESTS=OFF -DYAML_CPP_BUILD_CONTRIB=OFF -DCMAKE_INSTALL_PREFIX=/usr/local && \
-    make -j$(nproc) && \
-    make install && \
-    cd ../.. && \
-    rm -rf /tmp/yaml-cpp
+
 
 WORKDIR /app
 

@@ -7,11 +7,12 @@ project(qfluxion
     LANGUAGES CXX
 )   
 
-add_subdirectory(code/moc_builder)
+# add_subdirectory(code/moc_builder)
+add_subdirectory(code/store)
 
 
 file(COPY "${CMAKE_SOURCE_DIR}/user-state.yaml" DESTINATION ${CMAKE_BINARY_DIR})
 
 add_executable(qfluxion code/fluxion.cc)
 
-target_link_libraries(qfluxion PRIVATE MocBuilder)
+target_link_libraries(qfluxion PRIVATE Store)

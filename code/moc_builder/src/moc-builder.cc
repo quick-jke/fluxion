@@ -10,7 +10,7 @@ std::set<std::string> permitted_types = {"char", "signed char", "unsigned char",
 
 
 void MocBuilder::createType(const std::string& key, const std::string& value){
-    std::cout << "createType" << std::endl;
+    // std::cout << "createType" << std::endl;
     if(permitted_types.count(value)){ 
         private_fields_.push_back(value + std::string(" ") + key + std::string("_;"));
 
@@ -26,8 +26,8 @@ void MocBuilder::createType(const std::string& key, const std::string& value){
 
         
 
-        std::cout << value + std::string(" get") + result + std::string("();") << std::endl;
-        std::cout << std::string("void set") + result + std::string("(") + std::string(value) + std::string(" ") + key + std::string(");") << std::endl;
+        // std::cout << value + std::string(" get") + result + std::string("();") << std::endl;
+        // std::cout << std::string("void set") + result + std::string("(") + std::string(value) + std::string(" ") + key + std::string(");") << std::endl;
     }
 }
 
@@ -48,6 +48,14 @@ void MocBuilder::build(const std::filesystem::path& path){
 
                         if (value_node && value_node.IsScalar()) {
                             std::string value = value_node.as<std::string>();
+                            std::string result;
+                            result.reserve(key.size());
+                            result += static_cast<char>(
+                                std::toupper(static_cast<unsigned char>(key[0]))
+                            );
+                            result += key.substr(1);
+                            setters_getters_.push_back(value + std::string(" get") + result + std::string("();"));
+                            setters_getters_.push_back(std::string("void set") + result + std::string("(") + std::string(value) + std::string(" ") + key + std::string(");"));
                             createType(key, value);
                         }
                     }
@@ -66,7 +74,6 @@ void MocBuilder::build(const std::filesystem::path& path){
         std::cerr << "  " << el << "\n";
     }
 
-    std::cout << "asdasdasd" << std::endl;
 }
 
 
@@ -80,3 +87,5 @@ void MocBuilder::info(){
         std::cout << el << std::endl;
     }
 }
+
+
