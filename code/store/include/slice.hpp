@@ -5,21 +5,28 @@
 #include "state.hpp"
 #include <string>
 
-namespace quick{
-namespace fluxion{
-namespace store{
+namespace quick {
+namespace fluxion {
+namespace store {
 
 template <typename EnumType>
-class Slice{
+class Slicejke {
 public:
-    Slice(quick::fluxion::interface::statejke& state, Reducer<EnumType>& reducer) : state_(state), reducer_(reducer){}
-private:
-    quick::fluxion::interface::statejke state_;
-    Reducer<EnumType> reducer_;
+    Slicejke(quick::fluxion::interface::statejke& state, Reducerjke<EnumType>& reducer)
+        : state_(state), reducer_(reducer) {}
 
+    // Добавлен метод для безопасного получения редюсера
+    const Reducerjke<EnumType>& getReducer() const {
+        return reducer_;
+    }
+
+private:
+    quick::fluxion::interface::statejke& state_;
+    Reducerjke<EnumType> reducer_;
 };
 
+} // namespace store
+} // namespace fluxion
+} // namespace quick
 
-};};};
-
-#endif
+#endif // STORE_SLICE_H
